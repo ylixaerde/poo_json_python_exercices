@@ -1,0 +1,16 @@
+{
+    "name": "iPear 23",
+    "colors": ["black", "white", "red", "blue"],
+    "price": 999.99,
+    "in_stock": true,
+    "dimensions": {
+      "width": 2.82,
+      "height": 5.78,
+      "depth": 0.30
+    },
+    "features": [
+      "5G",
+      "HD display",
+      "Dual camera"
+    ]
+  }
