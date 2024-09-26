@@ -25,11 +25,14 @@ class SmartphoneDecoder(json.JSONDecoder):
         return new_smartphone
 
 
-smartphone_json = '{"name": "iPear 23 Plus", "colors": ["black", "white", "gold"], "price": 1299.99, "inStock": false}'
+# smartphone_json = '{"name": "iPear 23 Plus", "colors": ["black", "white", "gold"], "price": 1299.99, "inStock": false}'
 
-smartphone = json.loads(smartphone_json, cls=SmartphoneDecoder)
-print(type(smartphone)) # <class '__main__.Smartphone'>
-print(f"Smartphone name : {smartphone.name }")
-print(f"Smartphone colors : {smartphone.colors}")
-print(f"Smartphone price : {smartphone.price}")
-print(f"Smartphone inStock : {smartphone.in_stock}")
+with open("02_smartphone_poo_json.json") as file:
+    smartphone = json.load(file, cls=SmartphoneDecoder)
+    print(type(smartphone)) # <class '__main__.Smartphone'>
+    print(f"Smartphone name : {smartphone.name }")
+    print(f"Smartphone colors : {smartphone.colors}")
+    print(f"Smartphone price : {smartphone.price}")
+    print(f"Smartphone inStock : {smartphone.in_stock}")
+
+#smartphone = json.loads(smartphone_json, cls=SmartphoneDecoder)
