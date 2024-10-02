@@ -1,0 +1,13 @@
+{
+    "marque": "Toyota",
+    "modele": "Corolla",
+    "annee": 2021,
+    "couleurs_disponibles": ["Rouge", "Bleu", "Noir"],
+    "specifications": {
+      "moteur": "1.8L",
+      "puissance": "140 ch"
+    },
+    "prix": 23999.99,
+    "consommation": 6.5
+  }
+  
