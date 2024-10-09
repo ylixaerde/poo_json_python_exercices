@@ -35,4 +35,3 @@ with open("02_smartphone_poo_json.json") as smartphone_json:
     print(f"Smartphone colors : {smartphone.colors}")
     print(f"Smartphone price : {smartphone.price}")
     print(f"Smartphone inStock : {smartphone.in_stock}")
-
