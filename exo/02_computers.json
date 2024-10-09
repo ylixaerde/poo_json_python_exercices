@@ -1,0 +1,22 @@
+{
+    "marque": "Dell",
+    "modèle": "XPS 15",
+    "processeur": "Intel Core i7-12700H",
+    "mémoire_ram": "16 Go",
+    "stockage": "512 Go SSD",
+    "carte_graphique": "NVIDIA GeForce RTX 3050",
+    "système_d'exploitation": "Windows 11 Pro",
+    "ports": ["USB-C", "HDMI", "SD"],
+    "dimensions": {
+      "largeur": 355,
+      "profondeur": 225,
+      "hauteur": 15.2
+    },
+    "poids": 1.83,
+    "applications_installées": [
+      "Microsoft Office",
+      "Adobe Photoshop",
+      "Google Chrome",
+      "Visual Studio Code"
+    ]
+  }
