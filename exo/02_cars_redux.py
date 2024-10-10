@@ -1,5 +1,5 @@
 import json
-import jsonschema
+import jsonschema # pip install jsonschema
 from typing import Dict, Any, List
 
 class Car:
