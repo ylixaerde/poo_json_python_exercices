@@ -31,7 +31,9 @@ class CarDecoder(json.JSONDecoder):
     # class method containing the
     # custom parsing logic
     def object_hook(self, json_dict):
-        new_car = Car(
+        # Check if the current object is a Car
+        if 'marque' in json_dict:
+            new_car = Car(
             json_dict.get('marque'),
             json_dict.get('modele'),
             json_dict.get('annee'),
@@ -40,8 +42,10 @@ class CarDecoder(json.JSONDecoder):
             json_dict.get('prix'),
             json_dict.get('consommation')
         )
-
-        return new_car
+            return new_car
+        # Si ce n'est pas un Car, on renvoie simplement le dictionnaire
+        else:
+            return json_dict
 
 def fn_display_cars_details(car):
     print(
@@ -50,16 +54,17 @@ def fn_display_cars_details(car):
     f"Modèle : {car.modele}\n" 
     f"Année : {car.annee}\n"      
     f"couleurs_disponibles : {", ".join(car.couleurs_disponibles)}\n" 
-    f"Spécifications\n"     
-    f"Moteur : {car.specifications}\n"     
+    f"Spécifications\n" 
+    f"Moteur : {car.specifications['moteur']}\n"
+    f"Puissance : {car.specifications['puissance']}\n" 
     f"Prix : {car.prix}\n" 
     f"Consommation : {car.consommation}\n"
     )
 
 
 # Car = json.loads(car_json, cls=CarDecoder)
-
-with open("01_cars.json") as car_json:
+with open("01_cars.json", "r") as car_json:
     car = json.load(car_json, cls=CarDecoder)
     # print(type(car.specifications))
+    # print(car.specifications)
     fn_display_cars_details(car)
