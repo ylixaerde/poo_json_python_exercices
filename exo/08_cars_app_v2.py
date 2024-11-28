@@ -127,7 +127,12 @@ class App:
     
     # Ajout dans un fichier json des données contenues dans une liste d'objets Python 
     def fn_encode_obj_car_to_json(self, car, json_file):
-        cars_obj_list = self.fn_load_cars_obj_list(json_file)
+        try:
+            cars_obj_list = self.fn_load_cars_obj_list(json_file)
+        except FileNotFoundError :
+            cars_obj_list = []
+            with open(json_file, "w") :
+                print(f"Le fichier {json_file} a été créé")                 
         cars_obj_list.append(car)
         cars_dict_list = []
         for car_obj in cars_obj_list:
@@ -170,7 +175,7 @@ class App:
                     print("Option invalide, veuillez réessayer.")
 
     # variable de classe
-    json_file = "07_cars_app.json"
+    json_file = "08_cars_app.json"
 
 
 if __name__ == "__main__":
