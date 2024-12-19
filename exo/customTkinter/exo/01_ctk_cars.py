@@ -1,6 +1,101 @@
 import customtkinter as ctk
 import tkinter as tk
-from typing import Union, Callable
+from typing import Union, Callable, Dict, Any
+import json
+import jsonschema # pip install jsonschema
+
+class Car:
+    def __init__(self, marque: str, modele: str, annee: int, couleurs_disponibles: list[str], specifications: dict, prix: float, consommation: float):
+        self.marque = marque
+        self.modele = modele
+        self.annee = annee
+        self.couleurs_disponibles = couleurs_disponibles
+        self.specifications = specifications
+        self.prix = prix
+        self.consommation = consommation
+
+    def fn_to_dict(self):
+        # """Méthode pour convertir un objet Car en un dictionnaire sérialisable en JSON"""
+        return {
+            "marque": self.marque,
+            "modele": self.modele,
+            "annee": self.annee,
+            "couleurs_disponibles": self.couleurs_disponibles,
+            "specifications": self.specifications,
+            "prix": self.prix,
+            "consommation": self.consommation
+        }
+
+class CarDecoder(json.JSONDecoder):
+    def __init__(self, schema=None, *args, **kwargs):
+        self.schema = schema
+        super().__init__(object_hook=self.object_hook, *args, **kwargs)
+
+    def object_hook(self, json_dict: Dict[str, Any]):
+        if self.schema:
+            if 'marque' in json_dict:
+                jsonschema.validate(instance=json_dict, schema=self.schema)            
+                return Car(**json_dict)
+            return json_dict
+        else:
+            print(f"Erreur le schéma du fichier json est incorrect")
+    
+    # Schéma JSON correspondant à la classe Car
+    schema = {
+                "type": "object",
+                "properties": {
+                "marque": { "type": "string" },
+                "modele": { "type": "string" },
+                "annee": { "type": "integer" },
+                "couleurs_disponibles": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "specifications": {
+                    "type": "object",
+                    "properties": {
+                    "moteur": { "type": "number" },
+                    "puissance": { "type": "number" }
+                    },
+                    "required": ["moteur", "puissance"]
+                },
+                "prix": { "type": "number" },
+                "consommation": { "type": "number" }
+                },
+                "required": ["marque", "modele", "annee", "couleurs_disponibles", "specifications", "prix", "consommation"]
+            }
+    
+class CarManagement:
+    def fn_load_cars_obj_list(self, json_file):
+        with open(json_file, "r") as car_json:
+            car_list = json.load(car_json, cls=CarDecoder, schema=CarDecoder.schema)
+            return car_list
+     
+    # Ajout dans un fichier json des données contenues dans une liste d'objets Python 
+    def fn_encode_obj_car_to_json(self, car, json_file):
+        try:
+            cars_obj_list = self.fn_load_cars_obj_list(json_file)
+        except FileNotFoundError :
+            cars_obj_list = []
+            with open(json_file, "w") :
+                print(f"Le fichier {json_file} a été créé")                 
+        cars_obj_list.append(car)
+        cars_dict_list = []
+        for car_obj in cars_obj_list:
+            cars_dict_list.append(car_obj.fn_to_dict())           
+        with open(json_file, 'w', encoding='utf-8') as f:
+            json.dump(cars_dict_list, f, indent=4, ensure_ascii=False)
+        print(f"\nVoiture {car.marque} {car.modele} encodée")
+
+    def fn_encode_list_obj_car_to_json(self, cars_obj_list, json_file):
+        cars_dict_list = []
+        for car_obj in cars_obj_list:
+            cars_dict_list.append(car_obj.fn_to_dict())           
+        with open(json_file, 'w', encoding='utf-8') as f:
+            json.dump(cars_dict_list, f, indent=4, ensure_ascii=False)
+
+    # variable de classe
+    json_file = "01_ctk_cars.json"
 
 class FloatSpinbox(ctk.CTkFrame):
     def __init__(self, *args,
@@ -142,7 +237,18 @@ class App(ctk.CTk):
         self.encodeResultsButton.grid(row=10, column=1, columnspan=2, padx=20,pady=10, sticky="ew")
 
     def encodeResults(self):
-            print("Test button")
+        brand = self.brandEntry.get()
+        model = self.modelEntry.get()
+        year = self.yearOptionMenu.get()
+        color = []
+        color.append(self.checkboxVar.get())
+        power = self.power_spinbox.get()
+        engine = self.engineLabel.get()
+        price = self.price_spinbox.get()
+        fuel = self.fuelEntry.get()
+        car = Car(brand, model, year, color, {"moteur": power, "puissance": engine}, price, fuel)
+        car_management = CarManagement()
+        car_management.fn_encode_obj_car_to_json(car, car_management.json_file)
 
 if __name__ == "__main__":
     # gestion de l'apparence Dark mode et couleur verte
