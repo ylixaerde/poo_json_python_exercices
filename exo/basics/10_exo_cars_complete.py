@@ -64,7 +64,7 @@ class CarDecoder(json.JSONDecoder):
                 "required": ["marque", "modele", "annee", "couleurs_disponibles", "specifications", "prix", "consommation"]
             }
 
-class App:    
+class App:
     def fn_afficher_menu(self):
         print(f"\nMenu - Gestion de parc auto")
         print("1. Ajouter un nouvel voiture")
@@ -140,7 +140,7 @@ class App:
         cars_obj_list.append(car)
         cars_dict_list = []
         for car_obj in cars_obj_list:
-            cars_dict_list.append(car_obj.fn_to_dict())           
+            cars_dict_list.append(car_obj.fn_to_dict())
         with open(json_file, 'w', encoding='utf-8') as f:
             json.dump(cars_dict_list, f, indent=4, ensure_ascii=False)
         print(f"Voiture encodée")
@@ -160,8 +160,8 @@ class App:
         max_id_cars = length_cars_obj_list + 100
         print(f"DEBUG : length_cars_obj_list={length_cars_obj_list}")
         print(f"DEBUG : max_id_cars={max_id_cars}")
+        
         car_id_not_ok = True
-
         while car_id_not_ok:
             try:
                 car_id = int(input("Entrez l'ID de la voiture à modifier : "))
@@ -208,31 +208,31 @@ class App:
                 case 4:
                     try:
                         new_color = input(f"Entrez les couleurs de la voiture {car_id} : ")
-                        cars_obj_list[car_index].marque = new_color
+                        cars_obj_list[car_index].couleurs = new_color
                     except Exception as e:
                         print(f"Une erreur s'est produite : {e}")
                 case 5:
                     try:
                         new_power = input(f"Entrez la puissance de la voiture {car_id} : ")
-                        cars_obj_list[car_index].marque = new_power
+                        cars_obj_list[car_index].puissance = new_power
                     except Exception as e:
                         print(f"Une erreur s'est produite : {e}")
                 case 6:
                     try:
                         new_engine = input(f"Entrez la cylindrée du moteur de la voiture {car_id} : ")
-                        cars_obj_list[car_index].marque = new_engine
+                        cars_obj_list[car_index].moteur = new_engine
                     except Exception as e:
                         print(f"Une erreur s'est produite : {e}")
                 case 7:
                     try:
                         new_price = input(f"Entrez le prix de la voiture {car_id} : ")
-                        cars_obj_list[car_index].marque = new_price
+                        cars_obj_list[car_index].prix = new_price
                     except Exception as e:
                         print(f"Une erreur s'est produite : {e}")
                 case 8:
                     try:
                         new_consumption = input(f"Entrez la consommation de la voiture {car_id} : ")
-                        cars_obj_list[car_index].marque = new_consumption
+                        cars_obj_list[car_index].consommation = new_consumption
                     except Exception as e:
                         print(f"Une erreur s'est produite : {e}")
                 case 'Q':
