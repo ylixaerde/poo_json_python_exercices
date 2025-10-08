@@ -1,0 +1,25 @@
+{
+    "marque": "Dell",
+    "modele": "XPS 15",
+    "processeur": "Intel Core i7",
+    "memoire_ram": "16GB",
+    "stockage": "512GB SSD",
+    "carte_graphique": "RTX 3060",
+    "systeme_exploitation": "Windows 11",
+    "ports": [
+        "USB-C",
+        "HDMI",
+        "Ethernet"
+    ],
+    "dimensions": {
+        "hauteur": 15,
+        "largeur": 36,
+        "profondeur": 23
+    },
+    "poids": 1.8,
+    "applications_installees": [
+        "Office 365",
+        "Photoshop",
+        "Visual Studio Code"
+    ]
+}

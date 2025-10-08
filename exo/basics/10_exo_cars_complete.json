@@ -1,0 +1,30 @@
+[
+    {
+        "marque": "BMW",
+        "modele": "M4 GT3",
+        "annee": 2022,
+        "couleurs_disponibles": [
+            "blanc"
+        ],
+        "specifications": {
+            "moteur": "4.OL I6",
+            "puissance": 600.0
+        },
+        "prix": 180000.0,
+        "consommation": 18.0
+    },
+    {
+        "marque": "Ferrari",
+        "modele": "296 GT",
+        "annee": 2020,
+        "couleurs_disponibles": [
+            "Rouge"
+        ],
+        "specifications": {
+            "moteur": "3.6L",
+            "puissance": 612.0
+        },
+        "prix": 190000.0,
+        "consommation": 20.0
+    }
+]
